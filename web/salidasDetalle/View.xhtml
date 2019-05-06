@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalidasDetalleViewDlg" widgetVar="SalidasDetalleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSalidasDetalleTitle}">
+            <h:form id="SalidasDetalleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salidasDetalleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_codSd}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.codSd}" title="#{bundle.ViewSalidasDetalleTitle_codSd}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_cantidad}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.cantidad}" title="#{bundle.ViewSalidasDetalleTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_estadoSalida}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.estadoSalida}" title="#{bundle.ViewSalidasDetalleTitle_estadoSalida}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_observaciones}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.observaciones}" title="#{bundle.ViewSalidasDetalleTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_fechaSalida}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.fechaSalida}" title="#{bundle.ViewSalidasDetalleTitle_fechaSalida}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_codIngreso}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.codIngreso}" title="#{bundle.ViewSalidasDetalleTitle_codIngreso}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_codMm}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.codMm}" title="#{bundle.ViewSalidasDetalleTitle_codMm}"/>
+                        <h:outputText value="#{bundle.ViewSalidasDetalleLabel_codSalida}"/>
+                        <h:outputText value="#{salidasDetalleController.selected.codSalida}" title="#{bundle.ViewSalidasDetalleTitle_codSalida}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SalidasDetalleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

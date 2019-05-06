@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IngresosDetalleViewDlg" widgetVar="IngresosDetalleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewIngresosDetalleTitle}">
+            <h:form id="IngresosDetalleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ingresosDetalleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_codId}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.codId}" title="#{bundle.ViewIngresosDetalleTitle_codId}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_cantidad}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.cantidad}" title="#{bundle.ViewIngresosDetalleTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_cantidadRestante}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.cantidadRestante}" title="#{bundle.ViewIngresosDetalleTitle_cantidadRestante}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_lote}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.lote}" title="#{bundle.ViewIngresosDetalleTitle_lote}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_fechaRegistro}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.fechaRegistro}" title="#{bundle.ViewIngresosDetalleTitle_fechaRegistro}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_estadoIngreso}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.estadoIngreso}" title="#{bundle.ViewIngresosDetalleTitle_estadoIngreso}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_observacion}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.observacion}" title="#{bundle.ViewIngresosDetalleTitle_observacion}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_codIngreso}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.codIngreso}" title="#{bundle.ViewIngresosDetalleTitle_codIngreso}"/>
+                        <h:outputText value="#{bundle.ViewIngresosDetalleLabel_codMm}"/>
+                        <h:outputText value="#{ingresosDetalleController.selected.codMm}" title="#{bundle.ViewIngresosDetalleTitle_codMm}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="IngresosDetalleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

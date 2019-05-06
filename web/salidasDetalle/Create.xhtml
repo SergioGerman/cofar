@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalidasDetalleCreateDlg" widgetVar="SalidasDetalleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSalidasDetalleTitle}">
+            <h:form id="SalidasDetalleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salidasDetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_codSd}" for="codSd" />
+                        <p:inputText id="codSd" value="#{salidasDetalleController.selected.codSd}" title="#{bundle.CreateSalidasDetalleTitle_codSd}" required="true" requiredMessage="#{bundle.CreateSalidasDetalleRequiredMessage_codSd}"/>
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{salidasDetalleController.selected.cantidad}" title="#{bundle.CreateSalidasDetalleTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_estadoSalida}" for="estadoSalida" />
+                        <p:inputText id="estadoSalida" value="#{salidasDetalleController.selected.estadoSalida}" title="#{bundle.CreateSalidasDetalleTitle_estadoSalida}" />
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{salidasDetalleController.selected.observaciones}" title="#{bundle.CreateSalidasDetalleTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_fechaSalida}" for="fechaSalida" />
+                        <p:calendar id="fechaSalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{salidasDetalleController.selected.fechaSalida}" title="#{bundle.EditSalidasDetalleTitle_fechaSalida}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_codIngreso}" for="codIngreso" />
+                        <p:selectOneMenu id="codIngreso" value="#{salidasDetalleController.selected.codIngreso}" >
+                            <f:selectItems value="#{ingresosController.itemsAvailableSelectOne}"
+                                           var="codIngresoItem"
+                                           itemValue="#{codIngresoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_codMm}" for="codMm" />
+                        <p:selectOneMenu id="codMm" value="#{salidasDetalleController.selected.codMm}" >
+                            <f:selectItems value="#{muestrasmedicasController.itemsAvailableSelectOne}"
+                                           var="codMmItem"
+                                           itemValue="#{codMmItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSalidasDetalleLabel_codSalida}" for="codSalida" />
+                        <p:selectOneMenu id="codSalida" value="#{salidasDetalleController.selected.codSalida}" >
+                            <f:selectItems value="#{salidasController.itemsAvailableSelectOne}"
+                                           var="codSalidaItem"
+                                           itemValue="#{codSalidaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{salidasDetalleController.create}" value="#{bundle.Save}" update="display,:SalidasDetalleListForm:datalist,:growl" oncomplete="handleSubmit(args,'SalidasDetalleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SalidasDetalleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

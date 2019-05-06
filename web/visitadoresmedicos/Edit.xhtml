@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VisitadoresmedicosEditDlg" widgetVar="VisitadoresmedicosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVisitadoresmedicosTitle}">
+            <h:form id="VisitadoresmedicosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{visitadoresmedicosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_codVm}" for="codVm" />
+                        <p:inputText id="codVm" value="#{visitadoresmedicosController.selected.codVm}" title="#{bundle.EditVisitadoresmedicosTitle_codVm}" required="true" requiredMessage="#{bundle.EditVisitadoresmedicosRequiredMessage_codVm}"/>
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{visitadoresmedicosController.selected.nombre}" title="#{bundle.EditVisitadoresmedicosTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_apellidoPat}" for="apellidoPat" />
+                        <p:inputText id="apellidoPat" value="#{visitadoresmedicosController.selected.apellidoPat}" title="#{bundle.EditVisitadoresmedicosTitle_apellidoPat}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_apellidoMat}" for="apellidoMat" />
+                        <p:inputText id="apellidoMat" value="#{visitadoresmedicosController.selected.apellidoMat}" title="#{bundle.EditVisitadoresmedicosTitle_apellidoMat}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{visitadoresmedicosController.selected.telefono}" title="#{bundle.EditVisitadoresmedicosTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{visitadoresmedicosController.selected.email}" title="#{bundle.EditVisitadoresmedicosTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_fechaNac}" for="fechaNac" />
+                        <p:calendar id="fechaNac" pattern="MM/dd/yyyy" value="#{visitadoresmedicosController.selected.fechaNac}" title="#{bundle.EditVisitadoresmedicosTitle_fechaNac}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_ci}" for="ci" />
+                        <p:inputText id="ci" value="#{visitadoresmedicosController.selected.ci}" title="#{bundle.EditVisitadoresmedicosTitle_ci}" />
+                        <p:outputLabel value="#{bundle.EditVisitadoresmedicosLabel_tipousuario}" for="tipousuario" />
+                        <p:inputText id="tipousuario" value="#{visitadoresmedicosController.selected.tipousuario}" title="#{bundle.EditVisitadoresmedicosTitle_tipousuario}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{visitadoresmedicosController.update}" value="#{bundle.Save}" update="display,:VisitadoresmedicosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VisitadoresmedicosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VisitadoresmedicosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

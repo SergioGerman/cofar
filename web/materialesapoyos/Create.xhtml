@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaterialesapoyosCreateDlg" widgetVar="MaterialesapoyosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMaterialesapoyosTitle}">
+            <h:form id="MaterialesapoyosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{materialesapoyosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMaterialesapoyosLabel_codMa}" for="codMa" />
+                        <p:inputText id="codMa" value="#{materialesapoyosController.selected.codMa}" title="#{bundle.CreateMaterialesapoyosTitle_codMa}" required="true" requiredMessage="#{bundle.CreateMaterialesapoyosRequiredMessage_codMa}"/>
+                        <p:outputLabel value="#{bundle.CreateMaterialesapoyosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{materialesapoyosController.selected.descripcion}" title="#{bundle.CreateMaterialesapoyosTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{materialesapoyosController.create}" value="#{bundle.Save}" update="display,:MaterialesapoyosListForm:datalist,:growl" oncomplete="handleSubmit(args,'MaterialesapoyosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MaterialesapoyosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

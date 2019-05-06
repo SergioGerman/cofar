@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalidasEditDlg" widgetVar="SalidasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSalidasTitle}">
+            <h:form id="SalidasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salidasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSalidasLabel_codSalida}" for="codSalida" />
+                        <p:inputText id="codSalida" value="#{salidasController.selected.codSalida}" title="#{bundle.EditSalidasTitle_codSalida}" required="true" requiredMessage="#{bundle.EditSalidasRequiredMessage_codSalida}"/>
+                        <p:outputLabel value="#{bundle.EditSalidasLabel_anioSalida}" for="anioSalida" />
+                        <p:inputText id="anioSalida" value="#{salidasController.selected.anioSalida}" title="#{bundle.EditSalidasTitle_anioSalida}" />
+                        <p:outputLabel value="#{bundle.EditSalidasLabel_mesSalida}" for="mesSalida" />
+                        <p:inputText id="mesSalida" value="#{salidasController.selected.mesSalida}" title="#{bundle.EditSalidasTitle_mesSalida}" />
+                        <p:outputLabel value="#{bundle.EditSalidasLabel_codAlmacen}" for="codAlmacen" />
+                        <p:selectOneMenu id="codAlmacen" value="#{salidasController.selected.codAlmacen}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{almacenesController.itemsAvailableSelectOne}"
+                                           var="codAlmacenItem"
+                                           itemValue="#{codAlmacenItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{salidasController.update}" value="#{bundle.Save}" update="display,:SalidasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SalidasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SalidasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

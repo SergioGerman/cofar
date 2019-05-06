@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MuestrasmedicasEditDlg" widgetVar="MuestrasmedicasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMuestrasmedicasTitle}">
+            <h:form id="MuestrasmedicasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{muestrasmedicasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_codMm}" for="codMm" />
+                        <p:inputText id="codMm" value="#{muestrasmedicasController.selected.codMm}" title="#{bundle.EditMuestrasmedicasTitle_codMm}" required="true" requiredMessage="#{bundle.EditMuestrasmedicasRequiredMessage_codMm}"/>
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_nombreMm}" for="nombreMm" />
+                        <p:inputText id="nombreMm" value="#{muestrasmedicasController.selected.nombreMm}" title="#{bundle.EditMuestrasmedicasTitle_nombreMm}" />
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_fechaCaducidad}" for="fechaCaducidad" />
+                        <p:calendar id="fechaCaducidad" pattern="MM/dd/yyyy" value="#{muestrasmedicasController.selected.fechaCaducidad}" title="#{bundle.EditMuestrasmedicasTitle_fechaCaducidad}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_lote}" for="lote" />
+                        <p:inputText id="lote" value="#{muestrasmedicasController.selected.lote}" title="#{bundle.EditMuestrasmedicasTitle_lote}" />
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_codAt}" for="codAt" />
+                        <p:selectOneMenu id="codAt" value="#{muestrasmedicasController.selected.codAt}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{accionesterapeuticasController.itemsAvailableSelectOne}"
+                                           var="codAtItem"
+                                           itemValue="#{codAtItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_codEmpaque}" for="codEmpaque" />
+                        <p:selectOneMenu id="codEmpaque" value="#{muestrasmedicasController.selected.codEmpaque}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empaquesController.itemsAvailableSelectOne}"
+                                           var="codEmpaqueItem"
+                                           itemValue="#{codEmpaqueItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMuestrasmedicasLabel_codFf}" for="codFf" />
+                        <p:selectOneMenu id="codFf" value="#{muestrasmedicasController.selected.codFf}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{formasfarmaController.itemsAvailableSelectOne}"
+                                           var="codFfItem"
+                                           itemValue="#{codFfItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{muestrasmedicasController.update}" value="#{bundle.Save}" update="display,:MuestrasmedicasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MuestrasmedicasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MuestrasmedicasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

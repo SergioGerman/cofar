@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicosViewDlg" widgetVar="MedicosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMedicosTitle}">
+            <h:form id="MedicosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMedicosLabel_codMedico}"/>
+                        <h:outputText value="#{medicosController.selected.codMedico}" title="#{bundle.ViewMedicosTitle_codMedico}"/>
+                        <h:outputText value="#{bundle.ViewMedicosLabel_nombre}"/>
+                        <h:outputText value="#{medicosController.selected.nombre}" title="#{bundle.ViewMedicosTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewMedicosLabel_apellido}"/>
+                        <h:outputText value="#{medicosController.selected.apellido}" title="#{bundle.ViewMedicosTitle_apellido}"/>
+                        <h:outputText value="#{bundle.ViewMedicosLabel_direccion}"/>
+                        <h:outputText value="#{medicosController.selected.direccion}" title="#{bundle.ViewMedicosTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewMedicosLabel_telefono}"/>
+                        <h:outputText value="#{medicosController.selected.telefono}" title="#{bundle.ViewMedicosTitle_telefono}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MedicosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

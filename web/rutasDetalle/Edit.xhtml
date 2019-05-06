@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RutasDetalleEditDlg" widgetVar="RutasDetalleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRutasDetalleTitle}">
+            <h:form id="RutasDetalleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rutasDetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_codRutadetalle}" for="codRutadetalle" />
+                        <p:inputText id="codRutadetalle" value="#{rutasDetalleController.selected.codRutadetalle}" title="#{bundle.EditRutasDetalleTitle_codRutadetalle}" required="true" requiredMessage="#{bundle.EditRutasDetalleRequiredMessage_codRutadetalle}"/>
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_estadoVisita}" for="estadoVisita" />
+                        <p:inputText id="estadoVisita" value="#{rutasDetalleController.selected.estadoVisita}" title="#{bundle.EditRutasDetalleTitle_estadoVisita}" />
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_observacion}" for="observacion" />
+                        <p:inputText id="observacion" value="#{rutasDetalleController.selected.observacion}" title="#{bundle.EditRutasDetalleTitle_observacion}" />
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_fechaHoraVisita}" for="fechaHoraVisita" />
+                        <p:calendar id="fechaHoraVisita" pattern="MM/dd/yyyy HH:mm:ss" value="#{rutasDetalleController.selected.fechaHoraVisita}" title="#{bundle.EditRutasDetalleTitle_fechaHoraVisita}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_codMedico}" for="codMedico" />
+                        <p:selectOneMenu id="codMedico" value="#{rutasDetalleController.selected.codMedico}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicosController.itemsAvailableSelectOne}"
+                                           var="codMedicoItem"
+                                           itemValue="#{codMedicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditRutasDetalleLabel_codRuta}" for="codRuta" />
+                        <p:selectOneMenu id="codRuta" value="#{rutasDetalleController.selected.codRuta}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rutasController.itemsAvailableSelectOne}"
+                                           var="codRutaItem"
+                                           itemValue="#{codRutaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rutasDetalleController.update}" value="#{bundle.Save}" update="display,:RutasDetalleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RutasDetalleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RutasDetalleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

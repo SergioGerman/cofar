@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlmacenesCreateDlg" widgetVar="AlmacenesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAlmacenesTitle}">
+            <h:form id="AlmacenesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{almacenesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAlmacenesLabel_codAlmacen}" for="codAlmacen" />
+                        <p:inputText id="codAlmacen" value="#{almacenesController.selected.codAlmacen}" title="#{bundle.CreateAlmacenesTitle_codAlmacen}" required="true" requiredMessage="#{bundle.CreateAlmacenesRequiredMessage_codAlmacen}"/>
+                        <p:outputLabel value="#{bundle.CreateAlmacenesLabel_respAlmacen}" for="respAlmacen" />
+                        <p:inputText id="respAlmacen" value="#{almacenesController.selected.respAlmacen}" title="#{bundle.CreateAlmacenesTitle_respAlmacen}" />
+                        <p:outputLabel value="#{bundle.CreateAlmacenesLabel_tipousuario}" for="tipousuario" />
+                        <p:inputText id="tipousuario" value="#{almacenesController.selected.tipousuario}" title="#{bundle.CreateAlmacenesTitle_tipousuario}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{almacenesController.create}" value="#{bundle.Save}" update="display,:AlmacenesListForm:datalist,:growl" oncomplete="handleSubmit(args,'AlmacenesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlmacenesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

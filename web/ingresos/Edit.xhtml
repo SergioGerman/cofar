@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IngresosEditDlg" widgetVar="IngresosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIngresosTitle}">
+            <h:form id="IngresosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ingresosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIngresosLabel_codIngreso}" for="codIngreso" />
+                        <p:inputText id="codIngreso" value="#{ingresosController.selected.codIngreso}" title="#{bundle.EditIngresosTitle_codIngreso}" required="true" requiredMessage="#{bundle.EditIngresosRequiredMessage_codIngreso}"/>
+                        <p:outputLabel value="#{bundle.EditIngresosLabel_anioIngreso}" for="anioIngreso" />
+                        <p:inputText id="anioIngreso" value="#{ingresosController.selected.anioIngreso}" title="#{bundle.EditIngresosTitle_anioIngreso}" />
+                        <p:outputLabel value="#{bundle.EditIngresosLabel_mesIngreso}" for="mesIngreso" />
+                        <p:inputText id="mesIngreso" value="#{ingresosController.selected.mesIngreso}" title="#{bundle.EditIngresosTitle_mesIngreso}" />
+                        <p:outputLabel value="#{bundle.EditIngresosLabel_codAlmacen}" for="codAlmacen" />
+                        <p:selectOneMenu id="codAlmacen" value="#{ingresosController.selected.codAlmacen}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{almacenesController.itemsAvailableSelectOne}"
+                                           var="codAlmacenItem"
+                                           itemValue="#{codAlmacenItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ingresosController.update}" value="#{bundle.Save}" update="display,:IngresosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IngresosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IngresosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

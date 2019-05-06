@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IngresosViewDlg" widgetVar="IngresosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewIngresosTitle}">
+            <h:form id="IngresosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ingresosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewIngresosLabel_codIngreso}"/>
+                        <h:outputText value="#{ingresosController.selected.codIngreso}" title="#{bundle.ViewIngresosTitle_codIngreso}"/>
+                        <h:outputText value="#{bundle.ViewIngresosLabel_anioIngreso}"/>
+                        <h:outputText value="#{ingresosController.selected.anioIngreso}" title="#{bundle.ViewIngresosTitle_anioIngreso}"/>
+                        <h:outputText value="#{bundle.ViewIngresosLabel_mesIngreso}"/>
+                        <h:outputText value="#{ingresosController.selected.mesIngreso}" title="#{bundle.ViewIngresosTitle_mesIngreso}"/>
+                        <h:outputText value="#{bundle.ViewIngresosLabel_codAlmacen}"/>
+                        <h:outputText value="#{ingresosController.selected.codAlmacen}" title="#{bundle.ViewIngresosTitle_codAlmacen}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="IngresosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

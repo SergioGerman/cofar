@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicosEditDlg" widgetVar="MedicosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMedicosTitle}">
+            <h:form id="MedicosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMedicosLabel_codMedico}" for="codMedico" />
+                        <p:inputText id="codMedico" value="#{medicosController.selected.codMedico}" title="#{bundle.EditMedicosTitle_codMedico}" required="true" requiredMessage="#{bundle.EditMedicosRequiredMessage_codMedico}"/>
+                        <p:outputLabel value="#{bundle.EditMedicosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{medicosController.selected.nombre}" title="#{bundle.EditMedicosTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditMedicosLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{medicosController.selected.apellido}" title="#{bundle.EditMedicosTitle_apellido}" />
+                        <p:outputLabel value="#{bundle.EditMedicosLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{medicosController.selected.direccion}" title="#{bundle.EditMedicosTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditMedicosLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{medicosController.selected.telefono}" title="#{bundle.EditMedicosTitle_telefono}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{medicosController.update}" value="#{bundle.Save}" update="display,:MedicosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

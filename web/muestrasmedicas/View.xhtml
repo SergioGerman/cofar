@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MuestrasmedicasViewDlg" widgetVar="MuestrasmedicasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMuestrasmedicasTitle}">
+            <h:form id="MuestrasmedicasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{muestrasmedicasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_codMm}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.codMm}" title="#{bundle.ViewMuestrasmedicasTitle_codMm}"/>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_nombreMm}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.nombreMm}" title="#{bundle.ViewMuestrasmedicasTitle_nombreMm}"/>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_fechaCaducidad}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.fechaCaducidad}" title="#{bundle.ViewMuestrasmedicasTitle_fechaCaducidad}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_lote}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.lote}" title="#{bundle.ViewMuestrasmedicasTitle_lote}"/>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_codAt}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.codAt}" title="#{bundle.ViewMuestrasmedicasTitle_codAt}"/>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_codEmpaque}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.codEmpaque}" title="#{bundle.ViewMuestrasmedicasTitle_codEmpaque}"/>
+                        <h:outputText value="#{bundle.ViewMuestrasmedicasLabel_codFf}"/>
+                        <h:outputText value="#{muestrasmedicasController.selected.codFf}" title="#{bundle.ViewMuestrasmedicasTitle_codFf}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MuestrasmedicasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

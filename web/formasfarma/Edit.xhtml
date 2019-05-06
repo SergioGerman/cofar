@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormasfarmaEditDlg" widgetVar="FormasfarmaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFormasfarmaTitle}">
+            <h:form id="FormasfarmaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formasfarmaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFormasfarmaLabel_codFf}" for="codFf" />
+                        <p:inputText id="codFf" value="#{formasfarmaController.selected.codFf}" title="#{bundle.EditFormasfarmaTitle_codFf}" required="true" requiredMessage="#{bundle.EditFormasfarmaRequiredMessage_codFf}"/>
+                        <p:outputLabel value="#{bundle.EditFormasfarmaLabel_nombreFf}" for="nombreFf" />
+                        <p:inputText id="nombreFf" value="#{formasfarmaController.selected.nombreFf}" title="#{bundle.EditFormasfarmaTitle_nombreFf}" />
+                        <p:outputLabel value="#{bundle.EditFormasfarmaLabel_codMa}" for="codMa" />
+                        <p:selectOneMenu id="codMa" value="#{formasfarmaController.selected.codMa}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{materialesapoyosController.itemsAvailableSelectOne}"
+                                           var="codMaItem"
+                                           itemValue="#{codMaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formasfarmaController.update}" value="#{bundle.Save}" update="display,:FormasfarmaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FormasfarmaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormasfarmaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

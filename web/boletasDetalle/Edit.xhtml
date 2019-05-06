@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BoletasDetalleEditDlg" widgetVar="BoletasDetalleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBoletasDetalleTitle}">
+            <h:form id="BoletasDetalleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{boletasDetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_codBoletadetalle}" for="codBoletadetalle" />
+                        <p:inputText id="codBoletadetalle" value="#{boletasDetalleController.selected.codBoletadetalle}" title="#{bundle.EditBoletasDetalleTitle_codBoletadetalle}" required="true" requiredMessage="#{bundle.EditBoletasDetalleRequiredMessage_codBoletadetalle}"/>
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_observacion}" for="observacion" />
+                        <p:inputText id="observacion" value="#{boletasDetalleController.selected.observacion}" title="#{bundle.EditBoletasDetalleTitle_observacion}" />
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{boletasDetalleController.selected.cantidad}" title="#{bundle.EditBoletasDetalleTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_fechaEntrega}" for="fechaEntrega" />
+                        <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{boletasDetalleController.selected.fechaEntrega}" title="#{bundle.EditBoletasDetalleTitle_fechaEntrega}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_codMedico}" for="codMedico" />
+                        <p:selectOneMenu id="codMedico" value="#{boletasDetalleController.selected.codMedico}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicosController.itemsAvailableSelectOne}"
+                                           var="codMedicoItem"
+                                           itemValue="#{codMedicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_codMm}" for="codMm" />
+                        <p:selectOneMenu id="codMm" value="#{boletasDetalleController.selected.codMm}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{muestrasmedicasController.itemsAvailableSelectOne}"
+                                           var="codMmItem"
+                                           itemValue="#{codMmItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBoletasDetalleLabel_codVm}" for="codVm" />
+                        <p:selectOneMenu id="codVm" value="#{boletasDetalleController.selected.codVm}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{visitadoresmedicosController.itemsAvailableSelectOne}"
+                                           var="codVmItem"
+                                           itemValue="#{codVmItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{boletasDetalleController.update}" value="#{bundle.Save}" update="display,:BoletasDetalleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BoletasDetalleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BoletasDetalleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMuestrasmedicasTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="MuestrasmedicasListForm">
+                <p:panel header="#{bundle.ListMuestrasmedicasTitle}">
+                    <p:dataTable id="datalist" value="#{muestrasmedicasController.items}" var="item"
+                                 selectionMode="single" selection="#{muestrasmedicasController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codMm}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_codMm}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codMm}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_nombreMm}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreMm}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_fechaCaducidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCaducidad}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_lote}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lote}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_codAt}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codAt}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_codEmpaque}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codEmpaque}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMuestrasmedicasTitle_codFf}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codFf}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{muestrasmedicasController.prepareCreate}" update=":MuestrasmedicasCreateForm" oncomplete="PF('MuestrasmedicasCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MuestrasmedicasViewForm" oncomplete="PF('MuestrasmedicasViewDialog').show()" disabled="#{empty muestrasmedicasController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MuestrasmedicasEditForm" oncomplete="PF('MuestrasmedicasEditDialog').show()" disabled="#{empty muestrasmedicasController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{muestrasmedicasController.destroy}" update=":growl,datalist" disabled="#{empty muestrasmedicasController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
